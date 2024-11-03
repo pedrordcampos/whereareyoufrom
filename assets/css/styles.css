@@ -1,0 +1,146 @@
+html, body {
+    height: 100%; 
+    margin: 0; 
+}
+
+footer {
+    margin-top: auto; 
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex; 
+    flex-direction: column; 
+    font-family: "Inconsolata", serif;
+    font-weight: 400;
+    min-height: 100vh;
+    background-color: aliceblue;
+}
+
+.container {
+    flex: 1; 
+    display: flex; 
+    flex-direction: column; 
+    justify-content: center; 
+    align-items: center; 
+    padding: 20px; 
+}
+
+.container__header {
+    text-align: center;
+}
+
+.header__image, 
+.footer__image {
+    width: 100%; 
+}
+
+.footer__image {
+    padding-bottom: 0; 
+}
+
+.hidden {
+    display: none; 
+}
+
+h1 {
+    padding-top: 65px;
+    text-align: center;
+    font-size: 40px;
+}
+
+h2 {
+    padding-top: 65px;
+    text-align: center;
+    font-size: 35px;
+    font-style: italic;
+}
+
+.username-input {
+    padding-left: 40%;
+    margin-top: 20px;
+    width: 100%;
+    height: 30px;
+    border: 1px dashed gray;
+}
+
+.send-username {
+    width: 50%;
+    height: 40px;
+    margin-top: 20px;
+    border-radius: 20px;
+    border: 1px solid gray ;
+    cursor: pointer;
+
+}
+
+.send-username:hover {
+    background-color: lavender;
+    color: gray;
+}
+
+.carousel {
+    overflow: hidden;
+    width: 100%;
+    margin: 20px auto;
+    position: relative;
+    max-width: 600px; 
+}
+
+.images__flag {
+    display: flex;
+    gap: 15px; 
+    animation: scroll 10s linear infinite; 
+}
+
+.images__flag img {
+    width: 100px;  
+    height: 100px; 
+    object-fit: cover;    
+    transition: transform 1s, opacity 1s; 
+}
+
+#canada {
+    width: 15.6vh; 
+}
+
+.images__flag img:hover {
+    transform: scale(1.1); 
+}
+
+@keyframes scroll {
+    0% {
+        transform: translateX(0); 
+    }
+    80% {
+        transform: translateX(-50%);
+    }
+    100% {
+        transform: translateX(-50%);
+        opacity: 0; 
+    }
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+.images__flag {
+    animation: scroll 10s linear infinite, fadeOut 20s linear infinite; 
+}
