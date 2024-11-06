@@ -36,7 +36,7 @@ open index.html
 3. Configurando o Token do GitHub (Opcional, mas recomendado)
 Por padrão, o app funciona sem o token do GitHub, mas existem limites de requisição da API do GitHub para requisições não autenticadas. Para realizar requisições sem limites, é necessário adicionar o seu token pessoal do GitHub.
 
-Como obter um Token do GitHub:
+## Como obter um Token do GitHub:
 Acesse o GitHub.
 Clique na sua foto de perfil no canto superior direito e selecione Settings.
 Na barra lateral esquerda, clique em Developer settings.
@@ -44,7 +44,7 @@ Selecione Personal access tokens e clique em Generate new token.
 Selecione as permissões apropriadas (para este projeto, você precisa apenas de repo e read:user).
 Clique em Generate token e copie o token gerado.
 
-Adicionando o token no seu projeto:
+## Adicionando o token no seu projeto:
 Abra o arquivo assets/js/scripts.js.
 Localize a linha com const token = "";.
 Cole o seu token dentro das aspas, como no exemplo abaixo:
@@ -57,7 +57,7 @@ Salve as alterações no arquivo scripts.js.
 Sem o Token
 Se você não quiser usar o token do GitHub, o aplicativo ainda funcionará, mas estará sujeito aos limites de requisição não autenticada do GitHub. Caso você ultrapasse esses limites, uma mensagem de erro será exibida.
 
-Como Usar a Aplicação
+## Como Usar a Aplicação
 Quando a página carregar, você verá uma animação colorida e a mensagem: "Where are you from?".
 Após alguns segundos, o aplicativo pedirá para você Entrar com seu nome de usuário do GitHub.
 Digite qualquer nome de usuário do GitHub no campo de entrada e clique em Buscar Seguidores.
