@@ -63,12 +63,17 @@ h2 {
     font-style: italic;
 }
 
-.username-input {
+.username-input,
+.token-input {
     padding-left: 10px;
     margin-top: 20px;
     width: 100%;
     height: 30px;
     border: 1px dashed gray;
+}
+
+.token-heading {
+    margin-top: -40px;
 }
 
 .send-username {
@@ -78,12 +83,31 @@ h2 {
     border-radius: 20px;
     border: 1px solid gray ;
     cursor: pointer;
-
 }
 
 .send-username:hover {
     background-color: lavender;
     color: gray;
+}
+
+.back-button {
+    width: 20%;
+    height: 40px;
+    margin-top: 50px;
+    border-radius: 20px;
+    border: 1px solid gray;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.back-button:hover {
+    background-color: lavender;
+    color: gray; 
 }
 
 .carousel {
@@ -151,19 +175,30 @@ h2 {
     transition: color 0.3s ease;
 }
 
+/* Adicionando grid para a lista de seguidores em 2 colunas */
+#followers-list {
+    list-style: none;
+    padding: 0;
+    max-width: 900px;
+    margin: -100px auto 20px auto; /* Margem negativa para subir a lista */
+    display: grid; /* Usando grid para 2 colunas */
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Ajusta para 2 colunas */
+    gap: 20px; /* Espaço entre as colunas */
+}
 
+/* Estilizando os itens dos seguidores */
 .follower-item {
     display: flex;
     align-items: center;
     background-color: #f4f4f9;
     border-radius: 8px;
-    margin: 10px 0;
     padding: 15px;
     font-family: "Roboto", sans-serif;
     font-size: 16px;
     color: #333;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease;
+    margin-bottom: 0; 
 }
 
 .follower-item:hover {
@@ -183,27 +218,4 @@ h2 {
     font-weight: 700;
 }
 
-#followers-list {
-    list-style: none;
-    padding: 0;
-    max-width: 400px;
-    margin: 0 auto;
-}
 
-#notification {
-    max-width: 400px;
-    margin: 20px auto;
-    padding: 15px;
-    background-color: #e0f7fa; /* Azul claro */
-    color: #00796b; /* Azul petróleo */
-    border: 1px solid #4db6ac; /* Borda azul suave */
-    border-radius: 8px;
-    font-family: "Inconsolata", sans-serif;
-    text-align: center;
-    font-size: 14px;
-    display: none;
-}
-
-#notification.visible {
-    display: block;
-}
