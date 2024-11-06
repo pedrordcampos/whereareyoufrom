@@ -64,12 +64,14 @@ Digite qualquer nome de usuário do GitHub no campo de entrada e clique em Busca
 Os seguidores do nome de usuário informado serão exibidos com nome, avatar e localização.
 Caso haja algum erro (por exemplo, o nome de usuário não existe ou o token está ausente), uma mensagem de erro será exibida abaixo do campo de entrada.
 Contribuindo
-Fique à vontade para abrir issues ou enviar pull requests para melhorar o projeto.
 
+## Contribuição
+Fique à vontade para abrir issues ou enviar pull requests para melhorar o projeto.
 Faça um fork do repositório.
 Crie uma nova branch.
 Faça as alterações necessárias.
 Envie um pull request.
-Licença
+
+## Licença
 Este projeto está licenciado sob a Licença MIT - veja o arquivo LICENSE para mais detalhes.
 
