@@ -2,6 +2,8 @@
 
 Um projeto simples que permite aos usuários pesquisar seguidores no GitHub por nome de usuário. Este projeto utiliza a API do GitHub para buscar a lista de seguidores, exibindo detalhes como nome e localização. A aplicação possui um design interativo colorido com animações no texto.
 
+Você pode visualizar o projeto clicando [aqui](https://pedrordcampos.github.io/whereareyoufrom/)
+
 ## Funcionalidades
 
 - Pesquisar seguidores de qualquer usuário do GitHub.
