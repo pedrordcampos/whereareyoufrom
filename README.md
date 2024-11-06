@@ -25,7 +25,7 @@ Para rodar este projeto localmente, você vai precisar de:
 Primeiro, clone o repositório para sua máquina local:
 
 ```bash
-git clone https://github.com/seu-usuario/github-followers-search.git
+git clone https://github.com/pedrordcampos/github-followers-search.git
 cd github-followers-search
 ````
 
