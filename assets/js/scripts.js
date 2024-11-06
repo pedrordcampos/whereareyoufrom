@@ -1,49 +1,143 @@
 const carousel = document.querySelector(".carousel");
 const initialText = document.querySelector(".content-text");
+const followersList = document.getElementById("followers-list");
+const notification = document.getElementById("notification");
+const token = ""; // GitHub token (optional)
+
+// Função para adicionar cores a cada letra em um elemento de texto
+function colorizeText(element) {
+    const textContent = element.textContent;
+    element.innerHTML = ""; // Limpa o conteúdo atual
+    
+    // Define um array de cores
+    const colors = ["#FF5733", "#33FF57", "#3357FF", "#FF33A1", "#FF8C33", "#33FFF3", "#9933FF"];
+
+    // Envolve cada letra em um <span> com uma cor
+    textContent.split("").forEach((letter, index) => {
+        const span = document.createElement("span");
+        span.textContent = letter;
+        span.style.color = colors[index % colors.length];
+        element.appendChild(span);
+    });
+}
+
+// Exibir notificação caso o token não esteja disponível
+if (!token) {
+    notification.textContent = "Follower search may be limited because a GitHub token is not provided.";
+    notification.classList.add("visible");
+}
 
 // Função para limpar o carrossel
 function clearCarousel() {
     carousel.innerHTML = "";
 }
 
-// Primeiro timeout: mostrar o texto inicial após 5 segundos
+// Primeiro timeout: mostrar o texto inicial após 5 segundos e aplicar as cores
 setTimeout(() => {
-    clearCarousel(); 
-    initialText.classList.remove("hidden"); 
-}, 5000); 
+    clearCarousel();
+    initialText.classList.remove("hidden");
+    colorizeText(initialText); // Aplica a cor no texto "Where are you from?"
+}, 5000);
 
 // Segundo timeout: mostrar input de username após 10 segundos
 setTimeout(() => {
-    clearCarousel(); 
+    clearCarousel();
     initialText.classList.add("hidden");
-    
+
+    // Adiciona título para o input
     const heading = document.createElement("h2");
-    heading.textContent = "Your username on Github:";
+    heading.textContent = "Enter your GitHub username:";
+    heading.className = "username-heading";
     carousel.appendChild(heading);
 
+    colorizeText(heading); // Aplica o efeito colorido ao novo título
+
+    // Criação do input para o nome de usuário
     const input = document.createElement("input");
     input.className = "username-input";
     input.type = "text";
+    input.placeholder = "Type your GitHub username here";
     carousel.appendChild(input);
 
+    // Criação do botão de envio
     const button = document.createElement("button");
     button.className = "send-username";
-    button.textContent = "Send"; 
+    button.textContent = "Search Followers";
     carousel.appendChild(button);
 
     // Adicionando evento de clique ao botão
-    button.addEventListener("click", () => {
-        const username = input.value; 
+    button.addEventListener("click", async () => {
+        const username = input.value.trim();
         if (username) {
-            let follores = [];
-
-            // Chamando a API do GitHub
-            
-            const followerDetails = await fetch(`https://api.github.com/users/${follower.login}`).then(response => response.json());
-            followers.push({ name: followerDetails.login, country: followerDetails.location });
-            
+            await fetchFollowers(username);
         } else {
-            alert("Please enter a username."); 
+            notification.textContent = "Please enter a valid GitHub username.";
+            notification.classList.add("visible");
         }
     });
 }, 10000);
+
+// Função para buscar seguidores do usuário
+async function fetchFollowers(username) {
+    followersList.classList.remove("hidden");
+    followersList.innerHTML = "";
+    let page = 1;
+    let allFollowers = [];
+
+    try {
+        while (true) {
+            const response = await fetch(`https://api.github.com/users/${username}/followers?per_page=100&page=${page}`, {
+                headers: token ? { "Authorization": `token ${token}` } : {}
+            });
+
+            if (!response.ok) {
+                const errorResponse = await response.json();
+                throw new Error(errorResponse.message || "User not found or has no followers.");
+            }
+
+            const followers = await response.json();
+            if (followers.length === 0) break;
+
+            allFollowers = allFollowers.concat(followers);
+            page++;
+        }
+
+        if (allFollowers.length === 0) {
+            followersList.innerHTML = `<li>No followers found for "${username}".</li>`;
+        } else {
+            for (const follower of allFollowers) {
+                const followerDetails = await fetch(`https://api.github.com/users/${follower.login}`, {
+                    headers: token ? { "Authorization": `token ${token}` } : {}
+                });
+                const details = await followerDetails.json();
+
+                const listItem = document.createElement("li");
+                listItem.classList.add("follower-item");
+
+                // Avatar do seguidor
+                const avatar = document.createElement("img");
+                avatar.src = details.avatar_url;
+                avatar.alt = `${details.login}'s avatar`;
+
+                // Nome e localização
+                const textContainer = document.createElement("div");
+                const name = document.createElement("span");
+                name.textContent = details.login;
+                const location = document.createElement("p");
+                location.textContent = details.location || "Location: Unknown";
+                location.style.fontSize = "14px";
+                location.style.color = "#666";
+
+                textContainer.appendChild(name);
+                textContainer.appendChild(location);
+
+                listItem.appendChild(avatar);
+                listItem.appendChild(textContainer);
+
+                followersList.appendChild(listItem);
+            }
+        }
+    } catch (error) {
+        followersList.innerHTML = `<li style="color: #b30000;">Error: ${error.message}</li>`;
+    }
+}
